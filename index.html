@@ -33,6 +33,7 @@
 
 				<div class="content" id="avatar-block"></div>
 			</div>
+      <button onclick="getOneRandomQuote()">Reload</button>
 		</section>
 
 		<!-- We need to load axios first! -->
@@ -42,16 +43,19 @@
 			crossorigin="anonymous"
 		></script>
 		<script>
-      axios.get("https://simpsons-quotes-api.herokuapp.com/quotes")
-        .then(({data}) => {
-          console.log(data[0])
-          const avatarHtml = `
-            <p><strong>${data[0].character}</strong></p>
-            <img src="${data[0].image}" />
-            <p> ${data[0].quote} </p>
-          `
-          document.querySelector('#avatar-block').innerHTML = avatarHtml
-        })
+      const getOneRandomQuote = () => {
+        axios.get("https://simpsons-quotes-api.herokuapp.com/quotes")
+          .then(({data}) => {
+            console.log(data[0])
+            const avatarHtml = `
+              <p><strong>${data[0].character}</strong></p>
+              <img src="${data[0].image}" />
+              <p> ${data[0].quote} </p>
+            `
+            document.querySelector('#avatar-block').innerHTML = avatarHtml
+          })
+      }
+      getOneRandomQuote()
     </script>
 	</body>
 </html>
